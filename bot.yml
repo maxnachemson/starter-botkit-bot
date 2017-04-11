@@ -5,4 +5,7 @@ config:
   - name: BOTKIT_STUDIO_TOKEN
     friendly_name: Botkit Studio Token
     description: Token associated with your bot in Botkit Studio
+  - name: SLACK_TOKEN
+    friendly_name: Slack token
+    description: Token associated with your Slack bot 
 # To learn everything supported in the bot.yml file, visit https://beepboophq.com/docs/article/bot-yml
