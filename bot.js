@@ -8,11 +8,12 @@ var BotkitStorageBeepBoop = require('botkit-storage-beepboop')
 var request = require('request');
 
 
-
-const beepboop = BeepBoop.start(controller, {
-	debug: true //you might want to enable debug for testing :)
-});
-
+// Create the Botkit controller, which controls all instances of the bot.
+var controller = Botkit.slackbot({
+  debug: false,
+  studio_token: STUDIO_TOKEN,
+  storage: BotkitStorageBeepBoop()
+})
 controller.startTicking()
 
 // Set up an Express-powered webserver to expose oauth and webhook endpoints
