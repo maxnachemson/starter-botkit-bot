@@ -1,4 +1,5 @@
 var STUDIO_TOKEN = process.env.BOTKIT_STUDIO_TOKEN
+var SLACK_TOKEN = process.env.SLACK_TOKEN
 
 var Botkit = require('botkit')
 var fs = require('fs')
