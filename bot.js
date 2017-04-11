@@ -7,7 +7,7 @@ var BotkitStorageBeepBoop = require('botkit-storage-beepboop')
 var request = require('request');
 var controller = Botkit.slackbot({
   debug: false,
-  token: SLACK_TOKEN,
+  token: token,
   storage: BotkitStorageBeepBoop()
 });
 var options = {
