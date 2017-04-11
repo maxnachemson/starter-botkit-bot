@@ -1,10 +1,15 @@
 var Botkit = require('botkit');
-var controller = Botkit.slackbot();
+var fs = require('fs')
+var path = require('path')
 var token = process.env.SLACK_TOKEN;
 var debug = require('debug')('botkit:main')
 var BotkitStorageBeepBoop = require('botkit-storage-beepboop')
 var request = require('request');
-
+var controller = Botkit.slackbot({
+  debug: false,
+  token: SLACK_TOKEN,
+  storage: BotkitStorageBeepBoop()
+});
 var options = {
       url: 'https://script.googleusercontent.com/macros/echo?user_content_key=jQ2TC03qiZkWyvx07u8gzYWZiYtUzF5o8tkeG7unQdn2iQlye3fjmIQoIVzFfMcCSQe0qR3yPyNLONDRdDfs9Ww3xagBWEXcOJmA1Yb3SEsKFZqtv3DaNYcMrmhZHmUMWojr9NvTBuBLhyHCd5hHa1ZsYSbt7G4nMhEEDL32U4DxjO7V7yvmJPXJTBuCiTGh3rUPjpYM_V0PJJG7TIaKp1E_BOymz-tQ-8TxUtrLWLSKPKjFjBmpg0EpTpFurEIVpbQEzawfLw93LnxErnS8iQ&lib=MbpKbbfePtAVndrs259dhPT7ROjQYJ8yx'
 };
