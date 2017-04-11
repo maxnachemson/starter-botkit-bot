@@ -13,7 +13,7 @@ var controller = Botkit.slackbot({
   studio_token: STUDIO_TOKEN,
   storage: BotkitStorageBeepBoop()
 })
-
+console.log('hellooo');
 controller.startTicking()
 
 // Set up an Express-powered webserver to expose oauth and webhook endpoints
