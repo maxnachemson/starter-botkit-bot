@@ -7,12 +7,11 @@ var debug = require('debug')('botkit:main')
 var BotkitStorageBeepBoop = require('botkit-storage-beepboop')
 var request = require('request');
 
-// Create the Botkit controller, which controls all instances of the bot.
-var controller = Botkit.slackbot({
-  debug: false,
-  studio_token: STUDIO_TOKEN,
-  storage: BotkitStorageBeepBoop()
-})
+
+
+const beepboop = BeepBoop.start(controller, {
+	debug: true //you might want to enable debug for testing :)
+});
 
 controller.startTicking()
 
@@ -24,10 +23,7 @@ var normalizedPath = path.join(__dirname, 'skills')
 fs.readdirSync(normalizedPath).forEach(file => {
   require(path.join(normalizedPath, file))(controller)
 })
-controller.hears(["Hello","Hey","Hi","Yo"],["direct_message","direct_mention","mention","ambient"],function(bot,message) {
-    bot.reply(message,'Hi there!');
-    console.log("Incoming message: "+message.text);
-});
+
 // This captures and evaluates any message sent to the bot as a DM
 // or sent to the bot in the form "@bot message" and passes it to
 // Botkit Studio to evaluate for trigger words and patterns.
