@@ -17,6 +17,16 @@ var controller = Botkit.slackbot({
   slack_token: SLACK_TOKEN,
   storage: BotkitStorageBeepBoop()
 })
+
+var bot = controller.spawn ({
+    token:SLACK_TOKEN
+});
+bot.startRTM(function(err, bot, payload) {
+    if (err) {
+        console.log(err);
+        throw new Error('Could not connect to Slack');
+    }
+});
 controller.startTicking()
 
 // Set up an Express-powered webserver to expose oauth and webhook endpoints
