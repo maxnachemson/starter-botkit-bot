@@ -12,6 +12,7 @@ var request = require('request');
 // Create the Botkit controller, which controls all instances of the bot.
 var controller = Botkit.slackbot({
   debug: false,
+  token: SLACK_TOKEN,
   studio_token: STUDIO_TOKEN,
   slack_token: SLACK_TOKEN,
   storage: BotkitStorageBeepBoop()
