@@ -13,6 +13,7 @@ var request = require('request');
 var controller = Botkit.slackbot({
   debug: false,
   studio_token: STUDIO_TOKEN,
+  slack_token: SLACK_TOKEN,
   storage: BotkitStorageBeepBoop()
 })
 controller.startTicking()
