@@ -1,6 +1,8 @@
 var Botkit = require('botkit');
 var controller = Botkit.slackbot();
-var token = process.env.SLACK_TOKEN
+var token = process.env.SLACK_TOKEN;
+var debug = require('debug')('botkit:main')
+var BotkitStorageBeepBoop = require('botkit-storage-beepboop')
 var request = require('request');
 
 var options = {
