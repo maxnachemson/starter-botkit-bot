@@ -24,6 +24,7 @@ var fs = require('fs')
 var path = require('path')
 var debug = require('debug')('botkit:main')
 var BotkitStorageBeepBoop = require('botkit-storage-beepboop')
+var request = require('request');
 
 // Create the Botkit controller, which controls all instances of the bot.
 var controller = Botkit.slackbot({
