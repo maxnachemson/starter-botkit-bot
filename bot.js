@@ -23,13 +23,14 @@ function callback(error, response, body) {
 
     
     
-
 controller.hears(["Hello","Hey","Hi","Yo"],["direct_message","direct_mention","mention","ambient"],function(bot,message) {
     bot.reply(message,'Hi there!');
+    console.log("Incoming message: "+message.text);
 });
 
 controller.hears([/^.{0,}Thank.{0,}$/, /^.{0,}thx.{0,}$/],["direct_message","direct_mention","mention","ambient"],function(bot,message) {
     bot.reply(message,'No problems!');
+    console.log("Incoming message: "+message.text);
 });
 
 //
@@ -38,10 +39,13 @@ controller.hears([/^.{0,}Thank.{0,}$/, /^.{0,}thx.{0,}$/],["direct_message","dir
 
 controller.hears([/^.{0,}job.{0,}$/], ["direct_message","direct_mention","mention","ambient"], function (bot, message) {
   request(options, callback);
+  console.log("Incoming message: "+message.text);
   bot.startConversation(message, function (err, convo) {
     convo.ask('What kind of job are you looking for?', function (response, convo) {
         
         theData = info['Blad1'];
+        console.log("Total jobs in database: "+theData.length);
+        console.log("Search term: "+response.text);
         var results = [];
         toSearch = response.text;
         categoryArr = [];
@@ -70,6 +74,7 @@ controller.hears([/^.{0,}job.{0,}$/], ["direct_message","direct_mention","mentio
         var row = 0;
         for(var i=0; i<results.length; i++) {
             row++;
+            console.log(row+" match");
             newrow = '';
             newrow = { 
                 "fallback": "jobs jobs jobs",
@@ -90,6 +95,8 @@ controller.hears([/^.{0,}job.{0,}$/], ["direct_message","direct_mention","mentio
             }
             convo.say("I found "+row+" opening"+ending+":");
             convo.say(resultMessage);
+        } else {
+            console.log("0 match");
             convo.say("I couldn't find any jobs related to _"+toSearch+"_");
             convo.ask('Try narrowing it down by choosing a category: \n'+categoryMsg, function (response, convo) {
                 toSearch = response.text;
@@ -111,6 +118,7 @@ controller.hears([/^.{0,}job.{0,}$/], ["direct_message","direct_mention","mentio
                 var row = 0;
                 for(var i=0; i<results.length; i++) {
                     row++;
+                    console.log(row+" match");
                     newrow = '';
                     newrow = { 
                         "fallback": "jobs jobs jobs",
