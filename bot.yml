@@ -1,6 +1,7 @@
 name: Another Tomorrow
 description: Connecting talent with opportunities
 avatar: .beepboop/avatar.png
+background: .beepboop/attbg.png
 config:
   - name: BOTKIT_STUDIO_TOKEN
     friendly_name: Botkit Studio Token
