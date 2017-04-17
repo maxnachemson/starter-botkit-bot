@@ -47,13 +47,13 @@ controller.hears([/^.{0,}job.{0,}$/], ["direct_message","direct_mention","mentio
         console.log("Total jobs in database: "+theData.length);
         console.log("Search term: "+response.text);
         var results = [];
-        toSearch = response.text;
+        toSearch = response.text.toLowerCase();
         categoryArr = [];
         //Loop through the data from the database
         for(var i=0; i<theData.length; i++) {
           categoryArr[i] = theData[i].category;
           for(key in theData[i]) {
-            if(theData[i][key].includes(toSearch)) {
+            if(theData[i][key].toLowerCase().includes(toSearch)) {
               results.push(theData[i]);
               break;
             }
@@ -99,13 +99,13 @@ controller.hears([/^.{0,}job.{0,}$/], ["direct_message","direct_mention","mentio
             console.log("0 match");
             convo.say("I couldn't find any jobs related to _"+toSearch+"_");
             convo.ask('Try narrowing it down by choosing a category: \n'+categoryMsg, function (response, convo) {
-                toSearch = response.text;
+                toSearch = response.text.toLowerCase();
                 categoryArr = [];
                 //Loop through the data from the database
                 for(var i=0; i<theData.length; i++) {
                   categoryArr[i] = theData[i].category;
                   for(key in theData[i]) {
-                    if(theData[i][key].includes(toSearch)) {
+                    if(theData[i][key].toLowerCase().includes(toSearch)) {
                       results.push(theData[i]);
                       break;
                     }
