@@ -44,10 +44,16 @@ controller.hears([/^.{0,}job.{0,}$/], ["direct_message","direct_mention","mentio
     convo.ask('What kind of job are you looking for?', function (response, convo) {
         
         theData = info['Blad1'];
-        console.log("Total jobs in database: "+theData.length);
-        console.log("Search term: "+response.text);
         var results = [];
         toSearch = response.text.toLowerCase();
+        toSearch = toSearch.replace("something", "");
+        toSearch = toSearch.split( ' ' ).filter(function ( toSearch ) {
+    		var word = toSearch.match(/(\w+)/);
+    		return word && word[0].length > 3;
+		}).join( ' ' ); 
+		if (toSearch === "anything") {
+			toSearch = "";
+	  }
         categoryArr = [];
         //Loop through the data from the database
         for(var i=0; i<theData.length; i++) {
