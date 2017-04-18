@@ -49,7 +49,7 @@ controller.hears([/^.{0,}job.{0,}$/], ["direct_message","direct_mention","mentio
         toSearch = toSearch.replace("something", "");
         toSearch = toSearch.split( ' ' ).filter(function ( toSearch ) {
     		var word = toSearch.match(/(\w+)/);
-    		return word && word[0].length > 3;
+    		return word && word[0].length > 2;
 		}).join( ' ' ); 
 		if (toSearch === "anything") {
 			toSearch = "";
