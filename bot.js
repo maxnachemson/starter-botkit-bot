@@ -9,7 +9,7 @@ require('beepboop-botkit').start(controller, {debug: true})
 var request = require('request');
 
 var options = {
-      url: 'https://script.googleusercontent.com/macros/echo?user_content_key=jQ2TC03qiZkWyvx07u8gzYWZiYtUzF5o8tkeG7unQdn2iQlye3fjmIQoIVzFfMcCSQe0qR3yPyNLONDRdDfs9Ww3xagBWEXcOJmA1Yb3SEsKFZqtv3DaNYcMrmhZHmUMWojr9NvTBuBLhyHCd5hHa1ZsYSbt7G4nMhEEDL32U4DxjO7V7yvmJPXJTBuCiTGh3rUPjpYM_V0PJJG7TIaKp1E_BOymz-tQ-8TxUtrLWLSKPKjFjBmpg0EpTpFurEIVpbQEzawfLw93LnxErnS8iQ&lib=MbpKbbfePtAVndrs259dhPT7ROjQYJ8yx'
+      url: 'https://script.googleusercontent.com/macros/echo?user_content_key=nP1ifnCjqloshqQ-vUiCACVDAW9mYl6tlRHoneeT0VXPTq2ma57Tvh-RJKkAhEwgqTlxAlNRqM62I1U4KfUEetb64JXWiOffOJmA1Yb3SEsKFZqtv3DaNYcMrmhZHmUMWojr9NvTBuBLhyHCd5hHa1ZsYSbt7G4nMhEEDL32U4DxjO7V7yvmJPXJTBuCiTGh3rUPjpYM_V0PJJG7TIaKp-4yVWHBMQSOdR9UAH0gmL-ECaMHdSlEuMN-L4hJfPMG2eTZqffHiTs6rJGrx4fyGQ&lib=MbpKbbfePtAVndrs259dhPT7ROjQYJ8yx'
 };
 
 function callback(error, response, body) {
