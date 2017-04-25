@@ -28,14 +28,28 @@ controller.hears(["Hello","Hey","Hi","Yo"],["direct_message","direct_mention","m
     console.log("Incoming message: "+message.text);
 });
 
-controller.hears([/^.{0,}Thank.{0,}$/, /^.{0,}thx.{0,}$/],["direct_message","direct_mention","mention","ambient"],function(bot,message) {
-    bot.reply(message,'No problems!');
-    console.log("Incoming message: "+message.text);
+controller.hears(["Thank","Thanks","Thx"],["direct_message","direct_mention","mention","ambient"],function(bot,message) {
+    bot.reply(message,"You're welcome!");
+});
+controller.hears(["Talent"],["direct_message","direct_mention","mention","ambient"],function(bot,message) {
+    var talentMessage = {
+        "attachments": [
+        {
+            "fallback": "Contact Lotta Martin",
+            "color": "#36a64f",
+            "pretext": "Sweet! Then Lotta is your lady! Contact her to arrange a meeting",
+            "title": "lotta@anothertomorrow.io",
+            "title_link": "mailto:lotta@anothertomorrow.io",
+            "text": "+46 (0) 707 15 59 15",
+            "author_name": "Lotta Martin - Head of Talent",
+            "author_icon": "https://media.licdn.com/mpr/mpr/shrinknp_200_200/AAEAAQAAAAAAAAXnAAAAJDAxODA0NDk4LWVmMjgtNGFjMy05ZGRhLWUzNzBlYWEyZDRmNw.jpg"
+        }
+    ]
+    }
+    bot.reply(message,talentMessage);
+
 });
 
-//
-// case sensetive
-// category list
 
 controller.hears([/^.{0,}job.{0,}$/], ["direct_message","direct_mention","mention","ambient"], function (bot, message) {
   request(options, callback);
