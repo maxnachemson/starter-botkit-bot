@@ -36,7 +36,7 @@ controller.hears(["Talent"],["direct_message","direct_mention","mention","ambien
         "attachments": [
         {
             "fallback": "Contact Lotta Martin",
-            "color": "#36a64f",
+            "color": "#28ae95",
             "pretext": "Sweet! Then Lotta is your lady! Contact her to arrange a meeting",
             "title": "lotta@anothertomorrow.io",
             "title_link": "mailto:lotta@anothertomorrow.io",
@@ -98,7 +98,7 @@ controller.hears([/^.{0,}job.{0,}$/], ["direct_message","direct_mention","mentio
             newrow = '';
             newrow = { 
                 "fallback": "jobs jobs jobs",
-                "color":"#36a64f",
+                "color":"#28ae95",
                 "title": " "+results[i].title+" @"+results[i].company+" ",
                 "title_link": results[i].link,
 		"footer": results[i].employment
@@ -143,7 +143,7 @@ controller.hears([/^.{0,}job.{0,}$/], ["direct_message","direct_mention","mentio
                     newrow = '';
                     newrow = { 
                         "fallback": "jobs jobs jobs",
-                        "color":"#36a64f",
+                        "color":"#28ae95",
                         "title": " "+results[i].title+" @"+results[i].company+" ",
                         "title_link": results[i].link,
 			 "footer": results[i].employment
