@@ -1,4 +1,3 @@
-//test
 var Botkit = require('botkit')
 var BotkitStorageBeepBoop = require('botkit-storage-beepboop')
 var controller = Botkit.slackbot({debug: false, storage: BotkitStorageBeepBoop()})
@@ -18,9 +17,6 @@ function callback(error, response, body) {
     }
     return info;
 }
-
-//request(options, callback);
-
     
     
 controller.hears(["Hello","Hey","Hi","Yo"],["direct_message","direct_mention","mention","ambient"],function(bot,message) {
