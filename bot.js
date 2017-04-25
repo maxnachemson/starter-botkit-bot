@@ -1,10 +1,5 @@
-//test
-var Botkit = require('botkit')
-var BotkitStorageBeepBoop = require('botkit-storage-beepboop')
-var controller = Botkit.slackbot({debug: false, storage: BotkitStorageBeepBoop()})
-
-require('beepboop-botkit').start(controller, {debug: true})
-
+var Botkit = require('botkit');
+var controller = Botkit.slackbot();
 
 var request = require('request');
 
@@ -23,23 +18,40 @@ function callback(error, response, body) {
 
     
     
-controller.hears(["Hello","Hey","Hi","Yo"],["direct_message","direct_mention","mention","ambient"],function(bot,message) {
+/*
+controller.hears(["Hello","Hey","Hi","Yo","Hej"],["direct_message","direct_mention","mention","ambient"],function(bot,message) {
     bot.reply(message,'Hi there!');
-    console.log("Incoming message: "+message.text);
 });
+*/
 
-controller.hears([/^.{0,}Thank.{0,}$/, /^.{0,}thx.{0,}$/],["direct_message","direct_mention","mention","ambient"],function(bot,message) {
-    bot.reply(message,'No problems!');
-    console.log("Incoming message: "+message.text);
+
+controller.hears(["Hello","Hey","Hi","Yo","Hej"],["direct_message","direct_mention","mention","ambient"],function(bot,message) {
+    bot.reply(message,'Hi there!');
 });
+controller.hears(["Thank","Thanks","Thx"],["direct_message","direct_mention","mention","ambient"],function(bot,message) {
+    bot.reply(message,"You're welcome!");
+});
+controller.hears(["Talent"],["direct_message","direct_mention","mention","ambient"],function(bot,message) {
+    var talentMessage = {
+        "attachments": [
+        {
+            "fallback": "Contact Lotta Martin",
+            "color": "#36a64f",
+            "pretext": "Sweet! Then Lotta is your lady! Contact her to arrange a meeting",
+            "title": "lotta@anothertomorrow.io",
+            "title_link": "mailto:lotta@anothertomorrow.io",
+            "text": "+46 (0) 707 15 59 15",
+            "author_name": "Lotta Martin - Head of Talent",
+            "author_icon": "https://media.licdn.com/mpr/mpr/shrinknp_200_200/AAEAAQAAAAAAAAXnAAAAJDAxODA0NDk4LWVmMjgtNGFjMy05ZGRhLWUzNzBlYWEyZDRmNw.jpg"
+        }
+    ]
+    }
+    bot.reply(message,talentMessage);
 
-//
-// case sensetive
-// category list
+});
 
 controller.hears([/^.{0,}job.{0,}$/], ["direct_message","direct_mention","mention","ambient"], function (bot, message) {
   request(options, callback);
-  console.log("Incoming message: "+message.text);
   bot.startConversation(message, function (err, convo) {
     convo.ask('What kind of job are you looking for?', function (response, convo) {
         
@@ -53,7 +65,8 @@ controller.hears([/^.{0,}job.{0,}$/], ["direct_message","direct_mention","mentio
 		}).join( ' ' ); 
 		if (toSearch === "anything") {
 			toSearch = "";
-	  }
+		}
+
         categoryArr = [];
         //Loop through the data from the database
         for(var i=0; i<theData.length; i++) {
@@ -80,13 +93,13 @@ controller.hears([/^.{0,}job.{0,}$/], ["direct_message","direct_mention","mentio
         var row = 0;
         for(var i=0; i<results.length; i++) {
             row++;
-            console.log(row+" match");
             newrow = '';
             newrow = { 
-                "fallback": "jobs jobs jobs",
+                "fallback": "job",
                 "color":"#36a64f",
-                "title": " "+results[i].title+" @"+results[i].company+" ",
-                "title_link": results[i].link
+                "title": " "+results[i].title+" @"+results[i].company,
+                "title_link": results[i].link,
+                "footer": "Full-time"
         };
         resultMessage['attachments'].push(newrow);
         }
@@ -102,7 +115,6 @@ controller.hears([/^.{0,}job.{0,}$/], ["direct_message","direct_mention","mentio
             convo.say("I found "+row+" opening"+ending+":");
             convo.say(resultMessage);
         } else {
-            console.log("0 match");
             convo.say("I couldn't find any jobs related to _"+toSearch+"_");
             convo.ask('Try narrowing it down by choosing a category: \n'+categoryMsg, function (response, convo) {
                 toSearch = response.text.toLowerCase();
@@ -124,10 +136,9 @@ controller.hears([/^.{0,}job.{0,}$/], ["direct_message","direct_mention","mentio
                 var row = 0;
                 for(var i=0; i<results.length; i++) {
                     row++;
-                    console.log(row+" match");
                     newrow = '';
                     newrow = { 
-                        "fallback": "jobs jobs jobs",
+                        "fallback": "job",
                         "color":"#36a64f",
                         "title": " "+results[i].title+" @"+results[i].company+" ",
                         "title_link": results[i].link
@@ -153,3 +164,14 @@ controller.hears([/^.{0,}job.{0,}$/], ["direct_message","direct_mention","mentio
     })
   })
 })
+
+var bot = controller.spawn ({
+    token:require('./config').token
+});
+
+bot.startRTM(function(err, bot, payload) {
+    if (err) {
+        console.log(err);
+        throw new Error('Could not connect to Slack');
+    }
+});
