@@ -100,7 +100,8 @@ controller.hears([/^.{0,}job.{0,}$/], ["direct_message","direct_mention","mentio
                 "fallback": "jobs jobs jobs",
                 "color":"#36a64f",
                 "title": " "+results[i].title+" @"+results[i].company+" ",
-                "title_link": results[i].link
+                "title_link": results[i].link,
+		"footer": results[i].employment
         };
         resultMessage['attachments'].push(newrow);
         }
@@ -144,7 +145,8 @@ controller.hears([/^.{0,}job.{0,}$/], ["direct_message","direct_mention","mentio
                         "fallback": "jobs jobs jobs",
                         "color":"#36a64f",
                         "title": " "+results[i].title+" @"+results[i].company+" ",
-                        "title_link": results[i].link
+                        "title_link": results[i].link,
+			 "footer": results[i].employment
                 };
                 resultMessage['attachments'].push(newrow);
                 }
