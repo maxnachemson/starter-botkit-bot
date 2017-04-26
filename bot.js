@@ -172,7 +172,7 @@ controller.hears([/^.{0,}job.{0,}$/], ["direct_message","direct_mention","mentio
                         ]
                         }
                     convo.say("I couldn't find any current opportunities relating to _"+toSearch+"_");
-                    convo.say(message,lottaMsg2);
+                    convo.say(lottaMsg2);
                 }
                 convo.next();
             });
