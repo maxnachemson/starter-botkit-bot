@@ -166,6 +166,6 @@ controller.hears(["Thank","Thanks","Thx"],["direct_message","direct_mention","me
     } else {
         thxMsg = "My pleasure";
     }
-    bot.reply(message,"You're welcome!");
+    bot.reply(message,thxMsg);
 });
 
