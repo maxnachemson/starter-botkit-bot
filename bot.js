@@ -184,14 +184,18 @@ controller.hears([/^.{0,}job.{0,}$/], ["direct_message","direct_mention","mentio
   })
 })
 controller.hears(["Thank","Thanks","Thx"],["direct_message","direct_mention","mention","ambient"],function(bot,message) {
-    var x = Math.floor((Math.random() * 10) + 1);
+    if (typeof x == 'undefined') {
+        x = 1;
+    }
     var thxMsg = "";
-    if (x <= 5) {
+    if (x == 1) {
         thxMsg = "You're welcome!";
-    } else if (x >= 8) {
+        x = 2;
+    } else if (x == 2) {
         thxMsg = "Don’t mention it";
     } else {
         thxMsg = "My pleasure";
+        x = 1;
     }
     bot.reply(message,thxMsg);
 });
