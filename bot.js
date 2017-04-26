@@ -29,7 +29,7 @@ controller.hears(["Talent"],["direct_message","direct_mention","mention","ambien
         {
             "fallback": "Contact Lotta Martin",
             "color": "#168c7d",
-            "pretext": "Sweet! Then Lotta is your lady! Contact her to arrange a meeting",
+            "pretext": "Great! Then Lotta is your lady! Contact her to arrange a meeting",
             "title": "lotta@anothertomorrow.io",
             "title_link": "mailto:lotta@anothertomorrow.io",
             "text": "+46 (0) 707 15 59 15",
@@ -193,6 +193,7 @@ controller.hears(["Thank","Thanks","Thx"],["direct_message","direct_mention","me
         x = 2;
     } else if (x == 2) {
         thxMsg = "Don’t mention it";
+        x = 3;
     } else {
         thxMsg = "My pleasure";
         x = 1;
