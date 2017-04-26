@@ -24,11 +24,11 @@ controller.hears(["Hello","Hey","Hi"],["direct_message","direct_mention","mentio
 });
 
 controller.hears(["Talent"],["direct_message","direct_mention","mention","ambient"],function(bot,message) {
-    var talentMessage = {
+    var lottaMsg = {
         "attachments": [
         {
             "fallback": "Contact Lotta Martin",
-            "color": "#28ae95",
+            "color": "#168c7d",
             "pretext": "Sweet! Then Lotta is your lady! Contact her to arrange a meeting",
             "title": "lotta@anothertomorrow.io",
             "title_link": "mailto:lotta@anothertomorrow.io",
@@ -38,14 +38,14 @@ controller.hears(["Talent"],["direct_message","direct_mention","mention","ambien
         }
     ]
     }
-    bot.reply(message,talentMessage);
+    bot.reply(message,lottaMsg);
 });
 
 
 controller.hears([/^.{0,}job.{0,}$/], ["direct_message","direct_mention","mention","ambient"], function (bot, message) {
   request(options, callback);
   bot.startConversation(message, function (err, convo) {
-    convo.ask('What kind of job are you looking for?', function (response, convo) {
+    convo.ask('Sweet! What kind of job are you looking for?', function (response, convo) {
         
         theData = info['Blad1'];
         var results = [];
@@ -81,14 +81,24 @@ controller.hears([/^.{0,}job.{0,}$/], ["direct_message","direct_mention","mentio
         var resultMessage = {
             "attachments":[]
         };
+        var color = 0;
+        var hex = "";
         var row = 0;
         for(var i=0; i<results.length; i++) {
             row++;
-            console.log(row+" match");
+            color++;
+            if (color == 1) {
+                hex = "#168c7d";
+            } else if (color == 2) {
+                hex = "#f7b730";
+            } else {
+                hex = "#f4b7d4";
+                color = 0;
+            }
             newrow = '';
             newrow = { 
                 "fallback": "job result",
-                "color":"#28ae95",
+                "color": hex,
                 "title": " "+results[i].title+" @"+results[i].company+" ",
                 "title_link": results[i].link,
         "footer": results[i].employment
@@ -103,11 +113,11 @@ controller.hears([/^.{0,}job.{0,}$/], ["direct_message","direct_mention","mentio
             } else {
                 var ending = "s";
             }
-            convo.say("I found "+row+" opening"+ending+":");
+            convo.say("Voila! \nI found "+row+" opening"+ending+":");
             convo.say(resultMessage);
         } else {
-            convo.say("I couldn't find any jobs related to _"+toSearch+"_");
-            convo.ask('Try narrowing it down by choosing a category: \n'+categoryMsg, function (response, convo) {
+            convo.say("I couldn't find any current opportunities relating to _"+toSearch+"_");
+            convo.ask('Right now we have job openings in following categories: \n'+categoryMsg, function (response, convo) {
                 toSearch = response.text.toLowerCase();
                 categoryArr = [];
                 //Loop through the data from the database
@@ -144,8 +154,25 @@ controller.hears([/^.{0,}job.{0,}$/], ["direct_message","direct_mention","mentio
                     } else {
                         var ending = "s";
                     }
-                    convo.say("I found "+row+" opening"+ending+":");
+                    convo.say("Perfect, now I've found "+row+" opening"+ending+":");
                     convo.say(resultMessage);
+                } else {
+                        var lottaMsg2 = {
+                            "attachments": [
+                            {
+                                "fallback": "Contact Lotta Martin",
+                                "color": "#168c7d",
+                                "pretext": "Please contact Lotta if you don't find what your looking for",
+                                "title": "lotta@anothertomorrow.io",
+                                "title_link": "mailto:lotta@anothertomorrow.io",
+                                "text": "+46 (0) 707 15 59 15",
+                                "author_name": "Lotta Martin - Head of Talent",
+                                "author_icon": "https://media.licdn.com/mpr/mpr/shrinknp_200_200/AAEAAQAAAAAAAAXnAAAAJDAxODA0NDk4LWVmMjgtNGFjMy05ZGRhLWUzNzBlYWEyZDRmNw.jpg"
+                            }
+                        ]
+                        }
+                    convo.say("I couldn't find any current opportunities relating to _"+toSearch+"_");
+                    bot.reply(message,lottaMsg2);
                 }
                 convo.next();
             });
@@ -166,7 +193,6 @@ controller.hears(["Thank","Thanks","Thx"],["direct_message","direct_mention","me
     } else {
         thxMsg = "My pleasure";
     }
-          thxMsg = thxMsg+" x="+x;
     bot.reply(message,thxMsg);
 });
 
