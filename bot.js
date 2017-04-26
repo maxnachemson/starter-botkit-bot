@@ -116,8 +116,8 @@ controller.hears([/^.{0,}job.{0,}$/], ["direct_message","direct_mention","mentio
             convo.say("Voila! \nI found "+row+" opening"+ending+":");
             convo.say(resultMessage);
         } else {
-            convo.say("I couldn't find any current opportunities relating to _"+toSearch+"_");
-            convo.ask('Right now we have job openings in following categories: \n'+categoryMsg, function (response, convo) {
+            convo.say("I couldn't find any current openings relating to _"+toSearch+"_");
+            convo.ask('Right now we have opportunities in the following categories: \n'+categoryMsg, function (response, convo) {
                 toSearch = response.text.toLowerCase();
                 categoryArr = [];
                 //Loop through the data from the database
@@ -172,7 +172,7 @@ controller.hears([/^.{0,}job.{0,}$/], ["direct_message","direct_mention","mentio
                         ]
                         }
                     convo.say("I couldn't find any current opportunities relating to _"+toSearch+"_");
-                    bot.reply(message,lottaMsg2);
+                    convo.say(message,lottaMsg2);
                 }
                 convo.next();
             });
@@ -202,7 +202,7 @@ controller.hears(["Thank","Thanks","Thx"],["direct_message","direct_mention","me
 });
 
 controller.hears('','direct_message,direct_mention,mention',function(bot,message) {  
-    bot.reply(message,"I'm sorry, I didn't quite catch that");
+    bot.reply(message,"I'm sorry, I didn't quite catch that. Are you looking for Talent or a Job?'");
 })
 
 
