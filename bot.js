@@ -166,6 +166,7 @@ controller.hears(["Thank","Thanks","Thx"],["direct_message","direct_mention","me
     } else {
         thxMsg = "My pleasure";
     }
+          thxMsg = thxMsg+" x="+x;
     bot.reply(message,thxMsg);
 });
 
