@@ -202,7 +202,7 @@ controller.hears(["Thank","Thanks","Thx"],["direct_message","direct_mention","me
 });
 
 controller.hears('','direct_message,direct_mention,mention',function(bot,message) {  
-    bot.reply(message,"I'm sorry, I didn't quite catch that. Are you looking for Talent or a Job?'");
+    bot.reply(message,"I'm sorry, I didn't quite catch that. Are you looking for Talent or a Job?");
 })
 
 
