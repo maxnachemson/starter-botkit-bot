@@ -201,3 +201,13 @@ controller.hears(["Thank","Thanks","Thx"],["direct_message","direct_mention","me
     bot.reply(message,thxMsg);
 });
 
+controller.hears('','direct_message,direct_mention,mention',function(bot,message) {  
+    bot.reply(message,"I'm sorry, I didn't quite catch that");
+})
+
+
+
+
+
+
+
