@@ -200,6 +200,9 @@ controller.hears(["Thank","Thanks","Thx"],["direct_message","direct_mention","me
     }
     bot.reply(message,thxMsg);
 });
+controller.hears(["Fuck"],["direct_message","direct_mention","mention","ambient"],function(bot,message) {
+    bot.reply(message,"You'll have a hard time getting a job with that kind of language...");
+});
 
 controller.hears('','direct_message,direct_mention,mention',function(bot,message) {  
     bot.reply(message,"I'm sorry, I didn't quite catch that. Are you looking for Talent or a Job?");
