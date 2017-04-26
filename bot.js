@@ -19,14 +19,10 @@ function callback(error, response, body) {
 }
     
     
-controller.hears(["Hello","Hey","Hi","Yo"],["direct_message","direct_mention","mention","ambient"],function(bot,message) {
-    bot.reply(message,'Hi there!');
-    console.log("Incoming message: "+message.text);
+controller.hears(["Hello","Hey","Hi"],["direct_message","direct_mention","mention","ambient"],function(bot,message) {
+    bot.reply(message,'Hi! Welcome to Another Tomorrow Talent. \nAre you looking for Talent or a Job?');
 });
 
-controller.hears(["Thank","Thanks","Thx"],["direct_message","direct_mention","mention","ambient"],function(bot,message) {
-    bot.reply(message,"You're welcome!");
-});
 controller.hears(["Talent"],["direct_message","direct_mention","mention","ambient"],function(bot,message) {
     var talentMessage = {
         "attachments": [
@@ -43,13 +39,11 @@ controller.hears(["Talent"],["direct_message","direct_mention","mention","ambien
     ]
     }
     bot.reply(message,talentMessage);
-
 });
 
 
 controller.hears([/^.{0,}job.{0,}$/], ["direct_message","direct_mention","mention","ambient"], function (bot, message) {
   request(options, callback);
-  console.log("Incoming message: "+message.text);
   bot.startConversation(message, function (err, convo) {
     convo.ask('What kind of job are you looking for?', function (response, convo) {
         
@@ -58,12 +52,12 @@ controller.hears([/^.{0,}job.{0,}$/], ["direct_message","direct_mention","mentio
         toSearch = response.text.toLowerCase();
         toSearch = toSearch.replace("something", "");
         toSearch = toSearch.split( ' ' ).filter(function ( toSearch ) {
-    		var word = toSearch.match(/(\w+)/);
-    		return word && word[0].length > 2;
-		}).join( ' ' ); 
-		if (toSearch === "anything") {
-			toSearch = "";
-	  }
+            var word = toSearch.match(/(\w+)/);
+            return word && word[0].length > 2;
+        }).join( ' ' ); 
+        if (toSearch === "anything") {
+            toSearch = "";
+      }
         categoryArr = [];
         //Loop through the data from the database
         for(var i=0; i<theData.length; i++) {
@@ -93,15 +87,14 @@ controller.hears([/^.{0,}job.{0,}$/], ["direct_message","direct_mention","mentio
             console.log(row+" match");
             newrow = '';
             newrow = { 
-                "fallback": "jobs jobs jobs",
+                "fallback": "job result",
                 "color":"#28ae95",
                 "title": " "+results[i].title+" @"+results[i].company+" ",
                 "title_link": results[i].link,
-		"footer": results[i].employment
+        "footer": results[i].employment
         };
         resultMessage['attachments'].push(newrow);
         }
-
         
         //Send respond message
         if (results.length > 0) {
@@ -113,7 +106,6 @@ controller.hears([/^.{0,}job.{0,}$/], ["direct_message","direct_mention","mentio
             convo.say("I found "+row+" opening"+ending+":");
             convo.say(resultMessage);
         } else {
-            console.log("0 match");
             convo.say("I couldn't find any jobs related to _"+toSearch+"_");
             convo.ask('Try narrowing it down by choosing a category: \n'+categoryMsg, function (response, convo) {
                 toSearch = response.text.toLowerCase();
@@ -135,14 +127,13 @@ controller.hears([/^.{0,}job.{0,}$/], ["direct_message","direct_mention","mentio
                 var row = 0;
                 for(var i=0; i<results.length; i++) {
                     row++;
-                    console.log(row+" match");
                     newrow = '';
                     newrow = { 
-                        "fallback": "jobs jobs jobs",
+                        "fallback": "job result",
                         "color":"#28ae95",
                         "title": " "+results[i].title+" @"+results[i].company+" ",
                         "title_link": results[i].link,
-			 "footer": results[i].employment
+             "footer": results[i].employment
                 };
                 resultMessage['attachments'].push(newrow);
                 }
@@ -165,3 +156,16 @@ controller.hears([/^.{0,}job.{0,}$/], ["direct_message","direct_mention","mentio
     })
   })
 })
+controller.hears(["Thank","Thanks","Thx"],["direct_message","direct_mention","mention","ambient"],function(bot,message) {
+    var x = Math.floor((Math.random() * 10) + 1);
+    var thxMsg = "";
+    if (x <= 5) {
+        thxMsg = "You're welcome!";
+    } else if (x >= 8) {
+        thxMsg = "Don’t mention it";
+    } else {
+        thxMsg = "My pleasure";
+    }
+    bot.reply(message,"You're welcome!");
+});
+
