@@ -134,13 +134,24 @@ controller.hears([/^.{0,}job.{0,}$/], ["direct_message","direct_mention","mentio
                 var resultMessage = {
                     "attachments":[]
                 };
+                var color = 0;
+                var hex = "";
                 var row = 0;
                 for(var i=0; i<results.length; i++) {
+                    color++;
+                    if (color == 1) {
+                        hex = "#168c7d";
+                    } else if (color == 2) {
+                        hex = "#f7b730";
+                    } else {
+                        hex = "#f4b7d4";
+                        color = 0;
+                    }
                     row++;
                     newrow = '';
                     newrow = { 
                         "fallback": "job result",
-                        "color":"#28ae95",
+                        "color": hex,
                         "title": " "+results[i].title+" @"+results[i].company+" ",
                         "title_link": results[i].link,
              "footer": results[i].employment
@@ -207,10 +218,3 @@ controller.hears(["Fuck"],["direct_message","direct_mention","mention","ambient"
 controller.hears('','direct_message,direct_mention,mention',function(bot,message) {  
     bot.reply(message,"I'm sorry, I didn't quite catch that. Are you looking for Talent or a Job?");
 })
-
-
-
-
-
-
-
